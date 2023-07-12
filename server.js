@@ -165,22 +165,41 @@ function deleteCheck(e) {
            
         })
 
-        //switch to completed todos
-        todoList.querySelectorAll(".todo").forEach(function(todo) {
-            if(todo.classList.contains("checked")) {
-                todo.style.display = "flex";
-            } else {
-                todo.style.display = "none";
-            }
-
-            //apply active styling
-            filterUl.forEach((ul) => {
-                ul.children[0].classList.remove("selected");
-                ul.children[1].classList.remove("selected");
-                ul.children[2].classList.add("selected");
+        if(todo_item.classList.contains("checked")&&!filterUl[0].children[0].classList.contains("selected")){
+            todoList.querySelectorAll(".todo").forEach(function(todo) {
+                if(!todo.classList.contains("checked")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+    
+                //apply active styling
+                filterUl.forEach((ul) => {
+                    ul.children[0].classList.remove("selected");
+                    ul.children[1].classList.add("selected");
+                    ul.children[2].classList.remove("selected");
+                })
+               
             })
-           
-        })
+        }else if(!todo_item.classList.contains("checked")&&!filterUl[0].children[0].classList.contains("selected")){
+            todoList.querySelectorAll(".todo").forEach(function(todo) {
+                if(todo.classList.contains("checked")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+    
+                //apply active styling
+                filterUl.forEach((ul) => {
+                    ul.children[0].classList.remove("selected");
+                    ul.children[1].classList.remove("selected");
+                    ul.children[2].classList.add("selected");
+                })
+               
+            })
+        };
+        //switch to completed todos
+        
         localStorage.setItem("todos", JSON.stringify(todos));
         
         //update count
